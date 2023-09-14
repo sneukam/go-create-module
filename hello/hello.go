@@ -18,13 +18,43 @@ func main() {
 	log.SetPrefix("greetings: ")
 	log.SetFlags(0)
 
-	// Request a greetings message and print it.
-	// we are intentionally throwing an error below to practice handling it.
-	message, err := greetings.Hello("Spencer")
+	singleName()
+	manyNames()
+}
 
-	// throw error or print to terminal.
+func singleName() {
+
+	msg, err := greetings.Hello("Spencer")
+
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Error: Name in Hello() cannot be empty.")
 	}
-	fmt.Println(message)
+
+	fmt.Println(msg)
+	fmt.Println()
+}
+
+func manyNames() {
+
+	names := []string{
+		"Bobby",
+		"Jimmy",
+		"Carl",
+		"Ryan",
+	}
+
+	messages, err := greetings.Hellos(names)
+
+	if err != nil {
+		log.Fatal("Error: One or more of the names in manyNames() is empty.")
+	}
+
+	for _, name := range names {
+		fmt.Println(messages[name])
+	}
+
+	// ok, this is cool.
+	// bit more high level functionality.
+	// we don't have to loop over the map.
+	fmt.Println("\nHEDGIES ARE FUKT!!!")
 }
